@@ -1,0 +1,95 @@
+<script id="boards" type="text/x-handlebars-template">​
+	<div class='row'>
+		{{#each data}}
+		<div class="boards-tile col-md-4" id="{{id}}">
+			<p>
+				<a href="board.php?id={{id}}">{{this.name}}</a>
+				<a href="#" class="option settings"> <i class="fa fa-cog fa-inverse" aria-hidden="true"></i></a>
+			</p>
+		</div>
+		{{/each}} 	
+		<div class="boards-tile col-md-4">
+			<div class="row">
+  				<div class="col-xs-8 col-xs-offset-2">
+					<p><input type="text" class="form-control form-control-sm" placeholder="Use Shortlink" id="shortlink"></p>
+				</div>
+			</div>
+			<p id="addButton"><button type="button" class="btn btn-primary" id="add-board">Add new board</button></p>
+		</div>
+    </div> 
+</script>
+
+
+
+<script id="settings-template" type="text/x-handlebars-template">​
+	<div class="modal fade" id="modal-settings" tabindex="-1" role="dialog" aria-labelledby="modal-settings" aria-hidden="true">
+	  	<div class="modal-dialog" role="document">
+	   		<div class="modal-content">
+	   			<input type="hidden" value="{{data.id}}" id="idboard"> 
+	      		<div class="modal-header">
+	        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          			<span aria-hidden="true">&times;</span>
+	        		</button>
+	        		<h2 class="modal-title" id="modal-settings">{{data.setting.name}} Settings</h2>  
+	      		</div>
+
+	      		{{#if data.error}}
+	      		<div class="modal-body">
+	      			<p>{{data.error}}</p>
+	      		</div>
+	      		{{else}}
+	      		{{#if data.setting.labels}}
+	      		<div class="modal-body">
+	          		<h4>Labels</h4>
+	          		<div class="row suboption"> 
+	          			<div class="col-md-6"><p>Name</p></div>
+	          			<div class="col-md-3 text-center"><p title="Taken into accounts in the sprint">Additions</p></div>
+	          			<div class="col-md-3 text-center"><p title="Statistics about this labels">Stats</p></div>
+	          		</div>
+	          		{{#each data.setting.labels}}
+
+		            	<div class="row suboption"> 
+		              		<div class="col-md-6"> <p class="label-{{color}}">{{name}}</p> </div>
+		              		<div class="col-md-3 text-center"> 
+		              				<input type="checkbox" class="additions" value="{{id}}" {{#if set_additions}} checked {{/if}}/>
+		              		</div>
+		              		<div class="col-md-3 text-center">
+		              			<input type="checkbox" class="stats" value="{{id}}" {{#if set_additions}}disabled {{/if}}{{#if set}}checked{{/if}}/>
+		              		</div> 
+		              	</div>
+	          		{{/each}}
+	      		</div>
+	      		{{/if}}
+	      		{{#if data.setting.lists}}
+	      		<div class="modal-body">
+	          		<h4> Lists </h4>
+	          		<div class="row suboption"> 
+	              		<div class="col-md-6"><p>Name</p></div>
+	              		<div class="col-md-3 text-center"><p>Include</p></div>
+	            	</div>
+	          		{{#each data.setting.lists}}
+	            	<div class="row suboption"> 
+	              		<div class="col-md-6"><p>{{name}}</p></div>
+	              		<div class="col-md-3 text-center"><input type="checkbox" class="include" value="{{id}}" {{#if set}} checked {{/if}}/></div>
+	            	</div>
+	          		{{/each}}
+	      		</div>
+	       		
+	       		{{/if}}
+	      		{{/if}}
+
+	      		
+	      		<div class="modal-footer">
+	      			<p id="update">Updated {{data.time}}</p>
+	      			<button type="button" class="btn btn-info ladda-button" id='refresh' data-style="zoom-in">
+	      				<span class="ladda-label"><i class="fa fa-refresh" aria-hidden="true"></i> Refresh</span>
+	      			</button>
+	        		<button type="button" class="btn btn-secondary " id="close" data-dismiss="modal">Close</button>
+	        		
+	     		</div>
+	    	</div>
+	  	</div>
+	</div>
+</script>
+
+

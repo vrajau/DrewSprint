@@ -1,0 +1,25 @@
+<script id="archive-template" type="text/x-handlebars-template">​
+	{{#each data}}
+	<div class="week-card-container">
+		<h1> Week {{@key}} (<a href='#' id={{idWeek}} class="delete-archive"><i class="fa fa-trash" aria-hidden="true"></i></a>) </h1>
+		<div class="dashboard-card">
+			<table class="table summary">
+				<thead>
+					<tr><th>Data</th><th>Initial</th><th>Day 1</th><th>Day 2</th><th>Day 3</th><th>Day 4</th><th>Day 5</th></tr>
+				</thead>
+				<tbody>
+					<tr><td>Total Week</td>{{#each results.total_week}}<td>{{this}}</td>{{/each}}</tr>
+					<tr><td>Total Achieved</td>{{#each results.total_achieved}}<td>{{this}}</td>{{/each}}</tr>
+					<tr><td>% Achieved</td>{{#each results.percentage_achieved}}<td>{{this}}</td>{{/each}}</tr>
+					<tr><td>Total Remaining</td>{{#each results.total_remaining}}<td>{{this}}</td>{{/each}}</tr>
+					<tr><td>% Remaining</td>{{#each results.percentage_remaining}}<td>{{this}}</td>{{/each}}</tr>
+					{{#each results.additions}}
+					<tr><td class="label-{{this.color}}">{{this.name}}</td>{{#each this.total}}<td>{{this}}</td>{{/each}}</tr>
+					<tr><td class="label-{{this.color}}">% {{this.name}}</td>{{#each this.percentage}}<td>{{this}}</td>{{/each}}</tr>
+					{{/each}}
+				</tbody>
+			</table>
+		</div>
+	</div>
+	{{/each}}
+</script>

@@ -1,0 +1,68 @@
+<script id="current-scrum-template" type="text/x-handlebars-template">​
+	<h1> {{data.board}} (Last update : {{data.time}})</h1>
+	<div class="dashboard-card">
+		<table class="table summary">
+		<thead>
+			<tr>
+				<th>Lists</th>
+				<th><span class="label-black">Non-Addition</span></th>
+				{{#each data.additions}}
+					<th><span class="label-{{this.color}}">{{this.name}}</span></th>
+				{{/each}}
+				<th>Total</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr><td>Sprint</td><td>{{data.sprint.total_wo_add}}</td>{{#each data.sprint.additions}}<td>{{this.total}}</td>{{/each}}<td>{{data.sprint.total}}</td></tr>
+			{{#each data.included}}
+			<tr><td>{{name}}</td><td>{{total_wo_add}}</td>{{#each additions}}<td>{{this.total}}</td>{{/each}}<td>{{total}}</td></tr>
+			{{/each}}
+			<tr><td>Completed</td><td>{{data.completed.total_wo_add}}</td>{{#each data.completed.additions}}<td>{{this.total}}</td>{{/each}}<td>{{data.completed.total}}</td></tr>
+		</tbody>
+	</table>
+	</div>
+</script>
+
+
+
+<script id="control-sprint-template" type="text/x-handlebars-template">​
+
+{{#if data.status}}
+	<button type="button" class="btn btn-primary panel-sprint" id='save'><i class="fa fa-floppy-o" aria-hidden="true"></i> Snapshot </button>
+	<button type="button" class="btn btn-danger panel-sprint" id='stop'> <i class="fa fa-stop" aria-hidden="true"></i> Stop sprint</button>
+	
+{{else}}
+	<button type="button" class="btn btn-success panel-sprint" id='start'><i class="fa fa-play" aria-hidden="true"></i> Start sprint</button>
+{{/if}}
+	<button type="button" class="btn btn-info panel-sprint ladda-button" id='refresh' data-style="zoom-in"><span class="ladda-label"><i class="fa fa-refresh" aria-hidden="true"></i> Refresh</span></button>
+</script>
+
+<script id="weekly-sprint-template" type="text/x-handlebars-template">​
+{{#if data.total_week.length}}
+<div class="dashboard-card">
+	<table class="table summary">
+		<thead>
+			<tr><th>Data</th><th>Initial</th><th>Day 1</th><th>Day 2</th><th>Day 3</th><th>Day 4</th><th>Day 5</th></tr>
+		</thead>
+		<tbody>
+			<tr><td>Total Week</td>{{#each data.total_week}}<td>{{this}}</td>{{/each}}</tr>
+			<tr><td>Total Achieved</td>{{#each data.total_achieved}}<td>{{this}}</td>{{/each}}</tr>
+			<tr><td>% Achieved</td>{{#each data.percentage_achieved}}<td>{{this}}</td>{{/each}}</tr>
+			<tr><td>Total Remaining</td>{{#each data.total_remaining}}<td>{{this}}</td>{{/each}}</tr>
+			<tr><td>% Remaining</td>{{#each data.percentage_remaining}}<td>{{this}}</td>{{/each}}</tr>
+			{{#each data.additions}}
+				<tr><td class="label-{{this.color}}">{{this.name}}</td>{{#each this.total}}<td>{{this}}</td>{{/each}}</tr>
+				<tr><td class="label-{{this.color}}">% {{this.name}}</td>{{#each this.percentage}}<td>{{this}}</td>{{/each}}</tr>
+			{{/each}}
+		</tbody>
+	</table>
+</div>
+{{/if}}
+</script>
+
+
+
+
+
+
+
